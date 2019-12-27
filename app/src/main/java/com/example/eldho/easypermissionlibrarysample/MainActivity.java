@@ -33,16 +33,16 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
     public void ClickMe(View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            reqCameraAndReadExternalStorage();
+            launchCameraAndReadStorage();
         }
     }
 
     @AfterPermissionGranted(CAMERA_AND_STORAGE_PERMISSION_CODE)
-    private void reqCameraAndReadExternalStorage() { //Note : This method must be void and cant able to take any arguments
+    private void launchCameraAndReadStorage() { //Note : This method must be void and cant able to take any arguments
         String[] perms = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}; //Array of permission
         if (EasyPermissions.hasPermissions(this, perms)) { //check permission is granted or not
 
-            //code if permission is granted goes in here
+            /**Executing tasks if permission has granted in here*/
             Toast.makeText(this, "Granted", Toast.LENGTH_SHORT).show();
 
         } else {
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
         // This will forcefully ask permission again and again if permission denied, Cant able to use the activity unless the permission given
         // Do it in emergency situations only
-        reqCameraAndReadExternalStorage();
+        launchCameraAndReadStorage();
     }
 
     @Override
