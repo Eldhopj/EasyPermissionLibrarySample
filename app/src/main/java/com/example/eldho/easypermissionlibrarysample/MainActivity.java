@@ -2,8 +2,7 @@ package com.example.eldho.easypermissionlibrarysample;
 /**
  * Permissions in manifest
  * Add dependency "https://github.com/googlesamples/easypermissions"
- * Override onRequestPermissionResult
- *Implements EasyPermissions.PermissionCallbacks
+ * The easyPermissions flow "https://s3.ap-south-1.amazonaws.com/mindorks-server-uploads/implementing-easy-permissions-android-flow.png"
  *
  * */
 
@@ -11,10 +10,11 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
@@ -49,12 +49,22 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             /**Rationalte dialog write here*/
             EasyPermissions.requestPermissions(this, "Permission rationale string writes here",
                     CAMERA_AND_STORAGE_PERMISSION_CODE, perms);
+
+            //For finner control of Rationalte dialog use this
+//            EasyPermissions.requestPermissions(
+//                    new PermissionRequest.Builder(this, CAMERA_AND_STORAGE_PERMISSION_CODE, perms)
+//                            .setRationale("Permission rationale string writes here")
+//                            .setPositiveButtonText("Okayz")
+//                            .setNegativeButtonText("Cancel")
+//                            .setTheme(R.style.my_fancy_style)
+//                            .build());
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // Forward results to EasyPermissions
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
